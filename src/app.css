@@ -1,6 +1,30 @@
+#editor {
+  position: relative;
+}
+#editor-content {
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  right: 1em;
+  bottom: 1em;
+  /* opacity: 0.6; */
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 1em;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  width: calc(100% - 2em);
+  height: calc(100% - 2em);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
-    'Lucida Grande', sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+    sans-serif;
   font-weight: 300;
   font-size: 16px;
   margin: 0;
