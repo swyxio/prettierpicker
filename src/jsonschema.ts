@@ -1,7 +1,3 @@
-// import { JSONSchema6 } from "json-schema"
-
-// [key:string]: number
-
 export const properties = {
   arrowParens: {
     description: "Include parentheses around a sole arrow function parameter.",

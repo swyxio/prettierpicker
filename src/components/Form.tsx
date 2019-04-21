@@ -6,6 +6,56 @@ import {
 import { Options } from "prettier"
 import { properties } from "../jsonschema"
 import { useCheckInput, useInput } from "@swyx/hooks"
+import Tooltip from "@reach/tooltip"
+
+function nameAndDescWithToolTip(name: keyof typeof properties) {
+  return (
+    <React.Fragment>
+      <b>{name}</b>
+      <Tooltip
+        label={
+          <div style={{ padding: 10 }}>
+            <span style={{ display: "block" }}>
+              <b>{name}</b>
+            </span>
+            {properties[name].description}
+          </div>
+        }
+      >
+        <span>
+          {"  "}
+          <span style={{ textDecoration: "underline", color: "blue" }}>(?)</span>
+        </span>
+      </Tooltip>
+    </React.Fragment>
+  )
+}
+function labelWithnameAndDescWithToolTip(name: keyof typeof properties, child: React.ReactNode) {
+  return (
+    <label style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+      <span>
+        {child}
+        <b>{name}</b>
+      </span>
+      <Tooltip
+        label={
+          <div style={{ padding: 10 }}>
+            <span style={{ display: "block" }}>
+              <b>{name}</b>
+            </span>
+            {properties[name].description}
+          </div>
+        }
+      >
+        <span>
+          {"  "}
+          <span style={{ textDecoration: "underline", color: "blue" }}>(?)</span>
+        </span>
+      </Tooltip>
+    </label>
+  )
+}
+
 interface BaseFormProps<A> {
   rest?: A
   children?: React.ReactNode
@@ -47,7 +97,8 @@ export const Form: React.FC<FormProps> = function({
   })
   return (
     <form onSubmit={onSubmit}>
-      <label>
+      {labelWithnameAndDescWithToolTip(
+        "arrowParens",
         <input
           type="checkbox"
           {...useCheckInput(arrowParens.default === "always", {
@@ -55,10 +106,9 @@ export const Form: React.FC<FormProps> = function({
             localStorageName: "arrowParens"
           })}
         />
-        <b>arrowParens</b>
-        <p>{arrowParens.description}</p>
-      </label>
-      <label>
+      )}
+      {labelWithnameAndDescWithToolTip(
+        "bracketSpacing",
         <input
           type="checkbox"
           {...useCheckInput(bracketSpacing.default, {
@@ -66,10 +116,9 @@ export const Form: React.FC<FormProps> = function({
             localStorageName: "bracketSpacing"
           })}
         />
-        <b>bracketSpacing</b>
-        <p>{bracketSpacing.description}</p>
-      </label>
-      <label>
+      )}
+      {labelWithnameAndDescWithToolTip(
+        "jsxBracketSameLine",
         <input
           type="checkbox"
           {...useCheckInput(jsxBracketSameLine.default, {
@@ -77,10 +126,9 @@ export const Form: React.FC<FormProps> = function({
             localStorageName: "jsxBracketSameLine"
           })}
         />
-        <b>jsxBracketSameLine</b>
-        <p>{jsxBracketSameLine.description}</p>
-      </label>
-      <label>
+      )}
+      {labelWithnameAndDescWithToolTip(
+        "jsxSingleQuote",
         <input
           type="checkbox"
           {...useCheckInput(jsxSingleQuote.default, {
@@ -88,10 +136,9 @@ export const Form: React.FC<FormProps> = function({
             localStorageName: "jsxSingleQuote"
           })}
         />
-        <b>jsxSingleQuote</b>
-        <p>{jsxSingleQuote.description}</p>
-      </label>
-      <label>
+      )}
+      {labelWithnameAndDescWithToolTip(
+        "singleQuote",
         <input
           type="checkbox"
           {...useCheckInput(singleQuote.default, {
@@ -99,11 +146,9 @@ export const Form: React.FC<FormProps> = function({
             localStorageName: "singleQuote"
           })}
         />
-        <b>singleQuote</b>
-        <p>{singleQuote.description}</p>
-      </label>
-
-      <label>
+      )}
+      {labelWithnameAndDescWithToolTip(
+        "semi",
         <input
           type="checkbox"
           {...useCheckInput(semi.default, {
@@ -111,31 +156,9 @@ export const Form: React.FC<FormProps> = function({
             localStorageName: "semi"
           })}
         />
-        <b>semi</b>
-        <p>{semi.description}</p>
-      </label>
-      <label>
-        <input
-          type="number"
-          {...useInput(tabWidth.default, {
-            stateObserver: a => setOpts(d => void (d.tabWidth = Number(a))),
-            localStorageName: "tabWidth"
-          })}
-        />
-        <b>tabWidth</b>
-        <p>{tabWidth.description}</p>
-      </label>
-      <label>
-        <b>trailingComma</b>
-        Choose
-        <select {...tcInput}>
-          <option value="none">None (default)</option>
-          <option value="es5">ES5</option>
-          <option value="all">All</option>
-        </select>
-        <p>{tcOptions[tcInput.value as string]}</p>
-      </label>
-      <label>
+      )}
+      {labelWithnameAndDescWithToolTip(
+        "useTabs",
         <input
           type="checkbox"
           {...useCheckInput(useTabs.default, {
@@ -143,8 +166,32 @@ export const Form: React.FC<FormProps> = function({
             localStorageName: "useTabs"
           })}
         />
-        <b>useTabs</b>
-        <p>{useTabs.description}</p>
+      )}
+      <hr />
+
+      <label>
+        {nameAndDescWithToolTip("tabWidth")}
+        <p>
+          <input
+            type="number"
+            {...useInput(tabWidth.default, {
+              stateObserver: a => setOpts(d => void (d.tabWidth = Number(a))),
+              localStorageName: "tabWidth"
+            })}
+          />
+        </p>
+      </label>
+      <label>
+        {nameAndDescWithToolTip("trailingComma")}
+        <p>
+          Choose
+          <select {...tcInput}>
+            <option value="none">None (default)</option>
+            <option value="es5">ES5</option>
+            <option value="all">All</option>
+          </select>
+          <div>{tcOptions[tcInput.value as string]}</div>
+        </p>
       </label>
     </form>
   )

@@ -2,7 +2,7 @@
   position: relative;
 }
 #editor-content {
-  position: absolute;
+  /* position: absolute; */
   top: 0em;
   left: 0em;
   right: 1em;
@@ -22,6 +22,22 @@
   box-sizing: border-box;
 }
 
+[data-reach-tooltip] {
+  pointer-events: none;
+  position: absolute;
+  padding: 0.25em;
+  box-shadow: 2px 2px 10px hsla(0, 0%, 0%, 0.1);
+  white-space: nowrap;
+  font-size: 85%;
+  background: #f0f0f0;
+  color: #444;
+  border: solid 1px #ccc;
+}
+
+form label {
+  display: block;
+}
+
 body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
     sans-serif;
@@ -29,6 +45,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0;
+  transition: all 300ms ease;
 }
 
 a {

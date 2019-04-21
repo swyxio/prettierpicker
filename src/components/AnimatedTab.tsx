@@ -13,6 +13,8 @@ export function AnimatedTabs(props: any) {
   const tabsRef = React.useRef()
   const tabsRect = useRect(tabsRef)
 
+  const color = props.color || "red"
+
   // Put the function to change the positions on context so the
   // Tabs down the tree can easily access it
   return (
@@ -25,7 +27,7 @@ export function AnimatedTabs(props: any) {
           style={{
             position: "absolute",
             height: 2,
-            background: "red",
+            background: color,
             marginTop: -2,
 
             // Here is the actual animation part, we use the

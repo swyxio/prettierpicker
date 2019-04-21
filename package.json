@@ -13,6 +13,7 @@
     "@reach/rect": "^0.2.1",
     "@reach/router": "^1.2.1",
     "@reach/tabs": "^0.1.2",
+    "@reach/tooltip": "^0.1.1",
     "@swyx/hooks": "^0.0.14",
     "axios": "^0.18.0",
     "formik": "^1.5.2",
