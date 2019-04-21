@@ -30,7 +30,7 @@ export default () => {
     <div style={{ textAlign: "center" }}>
       <h1>Pick your Prettier Config</h1>
       <div style={{ display: "flex", justifyContent: "space-between", textAlign: "left" }}>
-        <div style={{ display: "inline", width: "100%", padding: 10 }}>
+        <div style={{ display: "inline", flex: 1, paddingRight: 10 }}>
           <AnimatedTabs color="red" style={{ height: "100%" }}>
             <TabList style={{ display: "flex", justifyContent: "space-around" }}>
               <AnimatedTab style={{ flex: 1 }}>Edit Raw Code</AnimatedTab>
@@ -56,7 +56,7 @@ export default () => {
             </TabPanels>
           </AnimatedTabs>
         </div>
-        <div style={{ display: "inline", width: 400 }}>
+        <div style={{ width: 300 }}>
           <AnimatedTabs color="green">
             <TabList style={{ justifyContent: "space-around" }}>
               <AnimatedTab>Edit</AnimatedTab>
@@ -89,27 +89,26 @@ export default () => {
 
 function str() {
   return `// arrowParens
-  const foo = bar => console.log(bar)
-  // bracketSpacing
-  function baz(foo) {
-     console.log(foo)
-  }
-  
-  // jsxBracketSameLine
-  // jsxSingleQuote
-  function MyComponent() {
-  return (<Foo 
-  bar="lskjdlskdjlskjdlskjd" 
-  baz="sdlksjdlqjwlkajdlwkj" 
-  quux="sdlksjdlqjwlkajdlwkj" 
-  >
-  <div> hi</div>
-  </Foo>)
-  }
-  // singleQuote
-  console.log("do", "you", "want", "singleQuote?")
-  // semi
-  console.log("no semi for life!!1!!")
+const foo = bar => console.log(bar)
+// bracketSpacing
+function baz({foo}) {
+console.log({foo})
+}
+// jsxBracketSameLine
+// jsxSingleQuote
+function MyComponent() {
+return (<Foo 
+bar="lskjdlskdjlskjdlskjd" 
+baz="sdlksjdlqjwlkajdlwkj" 
+quux="sdlksjdlqjwlkajdlwkj" 
+>
+<div> hi</div>
+</Foo>)
+}
+// singleQuote
+console.log("do", "you", "want", "singleQuote?")
+// semi
+console.log("no semi for life!!1!!")
 `
 }
 
