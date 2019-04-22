@@ -30,6 +30,7 @@ export const properties = {
   },
   parser: {
     description: "Which parser to use.",
+    default: "babel",
     oneOf: [
       { enum: ["flow"], description: "Flow" },
       { enum: ["babel"], description: "JavaScript" },

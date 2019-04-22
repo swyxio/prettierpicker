@@ -74,99 +74,40 @@ const tcOptions: Dict = {
 }
 
 type FormProps<A = React.FormHTMLAttributes<HTMLFormElement>> = BaseFormProps<A>
-export const Form: React.FC<FormProps> = function({
-  // opts,
-  setOpts,
-  onSubmit
-}) {
-  const {
-    arrowParens,
-    bracketSpacing,
-    jsxBracketSameLine,
-    jsxSingleQuote,
-    semi,
-    tabWidth,
-    trailingComma,
-    singleQuote,
-    useTabs
-  } = properties
-  // console.log("passed in for later use: ", opts)
-  const tcInput = useInput(trailingComma.default, {
+export const Form: React.FC<FormProps> = function({ setOpts, onSubmit }) {
+  const tcInput = useInput(properties.trailingComma.default, {
     stateObserver: a => setOpts(d => void (d.trailingComma = a as "none" | "es5" | "all")),
     localStorageName: "trailingComma"
   })
+
+  function inputWithLabelWithnameAndDescWithToolTip(name: keyof typeof properties) {
+    return labelWithnameAndDescWithToolTip(
+      name,
+      <input
+        type="checkbox"
+        {...useCheckInput(properties[name].default as boolean, {
+          stateObserver: a => setOpts(d => void (d[name] = a)),
+          localStorageName: name
+        })}
+      />
+    )
+  }
   return (
     <form onSubmit={onSubmit}>
       {labelWithnameAndDescWithToolTip(
         "arrowParens",
         <input
           type="checkbox"
-          {...useCheckInput(arrowParens.default === "always", {
+          {...useCheckInput(properties.arrowParens.default === "always", {
             stateObserver: a => setOpts(d => void (d.arrowParens = a ? "always" : "avoid")),
             localStorageName: "arrowParens"
           })}
         />
       )}
-      {labelWithnameAndDescWithToolTip(
-        "bracketSpacing",
-        <input
-          type="checkbox"
-          {...useCheckInput(bracketSpacing.default, {
-            stateObserver: a => setOpts(d => void (d.bracketSpacing = a)),
-            localStorageName: "bracketSpacing"
-          })}
-        />
+      {["bracketSpacing", "jsxBracketSameLine", "jsxSingleQuote", "singleQuote", "semi", "useTabs"].map(
+        inputWithLabelWithnameAndDescWithToolTip
       )}
-      {labelWithnameAndDescWithToolTip(
-        "jsxBracketSameLine",
-        <input
-          type="checkbox"
-          {...useCheckInput(jsxBracketSameLine.default, {
-            stateObserver: a => setOpts(d => void (d.jsxBracketSameLine = a)),
-            localStorageName: "jsxBracketSameLine"
-          })}
-        />
-      )}
-      {labelWithnameAndDescWithToolTip(
-        "jsxSingleQuote",
-        <input
-          type="checkbox"
-          {...useCheckInput(jsxSingleQuote.default, {
-            stateObserver: a => setOpts(d => void (d.jsxSingleQuote = a)),
-            localStorageName: "jsxSingleQuote"
-          })}
-        />
-      )}
-      {labelWithnameAndDescWithToolTip(
-        "singleQuote",
-        <input
-          type="checkbox"
-          {...useCheckInput(singleQuote.default, {
-            stateObserver: a => setOpts(d => void (d.singleQuote = a)),
-            localStorageName: "singleQuote"
-          })}
-        />
-      )}
-      {labelWithnameAndDescWithToolTip(
-        "semi",
-        <input
-          type="checkbox"
-          {...useCheckInput(semi.default, {
-            stateObserver: a => setOpts(d => void (d.semi = a)),
-            localStorageName: "semi"
-          })}
-        />
-      )}
-      {labelWithnameAndDescWithToolTip(
-        "useTabs",
-        <input
-          type="checkbox"
-          {...useCheckInput(useTabs.default, {
-            stateObserver: a => setOpts(d => void (d.useTabs = a)),
-            localStorageName: "useTabs"
-          })}
-        />
-      )}
+
       <hr />
 
       <label>
@@ -174,7 +115,7 @@ export const Form: React.FC<FormProps> = function({
         <p>
           <input
             type="number"
-            {...useInput(tabWidth.default, {
+            {...useInput(properties.tabWidth.default, {
               stateObserver: a => setOpts(d => void (d.tabWidth = Number(a))),
               localStorageName: "tabWidth"
             })}
