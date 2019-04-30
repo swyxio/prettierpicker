@@ -24,12 +24,14 @@ function App() {
         <nav>
           <Link to="/">Home</Link>
           {identity && identity.isLoggedIn ? (
-            <>
-              hello {name}! }
+            <div>
+              <span>
+                Logged in as <strong style={{ color: "orange" }}>{name}</strong>
+              </span>
               <button className="authbtn loggedin" onClick={() => setDialog(true)}>
                 LOG OUT
               </button>
-            </>
+            </div>
           ) : (
             <button className="authbtn" onClick={() => setDialog(true)}>
               LOG IN
