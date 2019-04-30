@@ -101,7 +101,7 @@ export default () => {
           </AnimatedTabs>
         </div>
       </div>
-      <div style={{ marginTop: 30 }}>
+      <div style={{ marginTop: 30, position: "relative" }}>
         <a href="https://github.com/sw-yx/prettierpicker">Source</a> | <a href="https://twitter.com/swyx">@swyx</a>
       </div>
     </div>
