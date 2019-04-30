@@ -20,6 +20,21 @@ export default () => {
   const { parser, plugins, ...displayedOpts } = opts
   console.log("Obscuring from displayedOpts", { parser, plugins })
 
+  const displayOptsRef = React.useRef<HTMLPreElement>()
+  const [clipboard, setClipboard] = React.useState("Copy")
+  const copyDisplayOptsToClipboard = () => {
+    setClipboard("copying...")
+    var range = document.createRange()
+    range.selectNodeContents(displayOptsRef.current)
+    var sel = window.getSelection()
+    sel.removeAllRanges()
+    sel.addRange(range)
+    const result = document.execCommand("copy")
+    // give some affordance for recopying
+    if (result) setTimeout(() => setClipboard("Copied to Clipboard!"), 150)
+    else setClipboard("Failed to Copy! This is a bug")
+  }
+
   let prettifiedCode = ""
   try {
     prettifiedCode = Prism.highlight(format(rawCode.value as string, opts), Prism.languages.javascript, "js")
@@ -29,7 +44,7 @@ export default () => {
   return (
     <div style={{ textAlign: "center" }}>
       <h1>Pick your Prettier Config</h1>
-      <div style={{ display: "flex", justifyContent: "space-between", textAlign: "left" }}>
+      <div className="mainSection" style={{ display: "flex", justifyContent: "space-between", textAlign: "left" }}>
         <div style={{ display: "inline", flex: 1, paddingRight: 10 }}>
           <AnimatedTabs color="red" style={{ height: "100%" }}>
             <TabList style={{ display: "flex", justifyContent: "space-around" }}>
@@ -77,7 +92,10 @@ export default () => {
                 <p>
                   Put this in your <code>.prettierrc</code>:
                 </p>
-                <pre>{JSON.stringify(displayedOpts, null, 2)}</pre>
+                <pre ref={displayOptsRef}>{JSON.stringify(displayedOpts, null, 2)}</pre>
+                <button style={{ border: "3px solid green", borderRadius: 10 }} onClick={copyDisplayOptsToClipboard}>
+                  📋 {clipboard}
+                </button>
               </TabPanel>
             </TabPanels>
           </AnimatedTabs>
@@ -101,9 +119,9 @@ console.log({foo})
 // jsxSingleQuote
 function MyComponent() {
 return (<Foo 
-bar="lskjdlskdjlskjdlskjd" 
-baz="sdlksjdlqjwlkajdlwkj" 
-quux="sdlksjdlqjwlkajdlwkj" 
+bar="watch" 
+baz="the" 
+quux="quotemarks" 
 >
 <div> hi</div>
 </Foo>)

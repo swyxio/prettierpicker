@@ -6,6 +6,7 @@ import path from "path"
 
 export default {
   entry: "index.tsx",
+  siteRoot: "https://prettierpicker.netlify.com",
   // getRoutes: async () => {
   //   const { data: posts } /* :{ data: Post[] } */ = await axios.get("https://jsonplaceholder.typicode.com/posts")
   //   return [

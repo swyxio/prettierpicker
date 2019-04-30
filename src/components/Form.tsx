@@ -16,7 +16,7 @@ function nameAndDescWithToolTip(name: keyof typeof properties) {
         label={
           <div style={{ padding: 10 }}>
             <span style={{ display: "block" }}>
-              <b>{name}</b>
+              <b>{name}</b> <em>(default: {String(properties[name].default)})</em>
             </span>
             {properties[name].description}
           </div>
@@ -32,7 +32,7 @@ function nameAndDescWithToolTip(name: keyof typeof properties) {
 }
 function labelWithnameAndDescWithToolTip(name: keyof typeof properties, child: React.ReactNode) {
   return (
-    <label style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+    <label key={name} style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
       <span>
         {child}
         <b>{name}</b>
@@ -41,7 +41,7 @@ function labelWithnameAndDescWithToolTip(name: keyof typeof properties, child: R
         label={
           <div style={{ padding: 10 }}>
             <span style={{ display: "block" }}>
-              <b>{name}</b>
+              <b>{name}</b> <em>(default: {String(properties[name].default)})</em>
             </span>
             {properties[name].description}
           </div>
@@ -111,6 +111,19 @@ export const Form: React.FC<FormProps> = function({ setOpts, onSubmit }) {
       <hr />
 
       <label>
+        {nameAndDescWithToolTip("printWidth")}
+        <p>
+          <input
+            type="number"
+            {...useInput(properties.printWidth.default, {
+              stateObserver: a => setOpts(d => void (d.printWidth = Number(a))),
+              localStorageName: "printWidth"
+            })}
+          />
+        </p>
+      </label>
+
+      <label>
         {nameAndDescWithToolTip("tabWidth")}
         <p>
           <input
@@ -125,13 +138,13 @@ export const Form: React.FC<FormProps> = function({ setOpts, onSubmit }) {
       <label>
         {nameAndDescWithToolTip("trailingComma")}
         <p>
-          Choose
           <select {...tcInput}>
             <option value="none">None (default)</option>
             <option value="es5">ES5</option>
             <option value="all">All</option>
           </select>
-          <div>{tcOptions[tcInput.value as string]}</div>
+          <br />
+          <span>{tcOptions[tcInput.value as string]}</span>
         </p>
       </label>
     </form>
