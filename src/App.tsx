@@ -1,5 +1,5 @@
 import React from "react"
-import { Root, Routes, addPrefetchExcludes } from "react-static"
+import { Root, Routes, addPrefetchExcludes, Head } from "react-static"
 import { Link, Router } from "@reach/router"
 // import FancyDiv from 'components/FancyDiv'
 import Dynamic from "containers/Dynamic"
@@ -21,6 +21,20 @@ function App() {
   return (
     <Root>
       <IdentityContextProvider value={identity}>
+        <Head>
+          <meta charSet="utf-8" />
+          <title>Prettier Picker</title>
+          <link rel="canonical" href="http://prettierpicker.netlify.com" />
+          <meta property="og:type" content="article" />
+          <meta property="og:title" content={"Prettier Picker"} />
+          <meta property="og:description" content={"pick your prettier config"} />
+          <meta property="og:url" content={`http://prettierpicker.netlify.com`} />
+          <meta property="og:site_name" content={`${"Prettier Picker"}`} />
+          <meta name="twitter:title" content={"Prettier Picker"} />
+          <meta name="twitter:description" content={"pick your prettier config"} />
+          <meta name="twitter:site" content="@swyx" />
+          <meta name="twitter:creator" content="@swyx" />
+        </Head>
         <nav>
           <Link to="/">Home</Link>
           {identity && identity.isLoggedIn ? (
