@@ -1,21 +1,11 @@
-# React-Static - TypeScript Template
+# Prettier picker
 
-To use this template, run `react-static create` and use the `typescript` template.
+pick a prettier config
 
-## Path Aliases for Absolute Imports
+features:
 
-`react-static-typescript-plugin` supports path aliases [since v3.1](https://github.com/nozzle/react-static/pull/963#issuecomment-455596728). It has been set up in this template.
-
-```js
-// tsconfig.json
-{
-  // ...
-    "paths": {
-      "@components/*": ["src/components/*"]
-    },
-  // ...
-}
-
-// this works in your React app
-import FancyDiv from '@components/FancyDiv'
-```
+- syntax highlighted prettier text
+- animated tabs
+- authentication
+- persist to local storage
+- copy to clipboard
