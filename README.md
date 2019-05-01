@@ -1,4 +1,6 @@
-# Prettier picker
+# Prettier Picker
+
+https://prettierpicker.netlify.com/
 
 pick a prettier config
 
